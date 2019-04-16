@@ -1,0 +1,18 @@
+public void makeIndex(String docsFile, String noiseWordsFile) 
+	throws FileNotFoundException {
+		// load noise words to hash table
+		Scanner sc = new Scanner(new File(noiseWordsFile));
+		while (sc.hasNext()) {
+			String word = sc.next();
+			noiseWords.add(word);
+		}
+		
+		// index all keywords
+		sc = new Scanner(new File(docsFile));
+		while (sc.hasNext()) {
+			String docFile = sc.next();
+			HashMap<String,Occurrence> kws = loadKeywordsFromDocument(docFile);
+			mergeKeywords(kws);
+		}
+		sc.close();
+	}
