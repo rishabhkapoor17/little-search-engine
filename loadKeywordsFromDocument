@@ -1,0 +1,20 @@
+public HashMap<String,Occurrence> loadKeywordsFromDocument(String docFile) 
+	throws FileNotFoundException {
+		HashMap<String, Occurrence> keywords=new HashMap<String, Occurrence>();
+		Scanner sc=new Scanner(new File(docFile));
+		while(sc.hasNext())
+		{
+			String word=sc.next();
+			if(getKeyword(word)!=null)
+			{
+				if(!(keywords.containsKey(getKeyword(word))))
+				keywords.put(getKeyword(word), new Occurrence(docFile,1));
+				else
+				{
+					keywords.get(getKeyword(word)).frequency++;
+				}
+			}
+		}
+		sc.close();
+		return keywords;
+	}
