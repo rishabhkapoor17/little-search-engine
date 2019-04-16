@@ -1,0 +1,43 @@
+public ArrayList<Integer> insertLastOccurrence(ArrayList<Occurrence> occs) {
+		int target=occs.get(occs.size()-1).frequency;
+		int left=0;
+		int right=occs.size()-2;
+		int midpoint=0;
+		ArrayList<Integer> midpointer =new ArrayList<Integer>();
+		while(left<=right)
+		{
+			midpoint=(left+right)/2;
+			midpointer.add(midpoint);
+			if(target==occs.get(midpoint).frequency)
+			{
+				break;
+			}
+			else if(target>occs.get(midpoint).frequency)
+			{
+				right=midpoint-1;
+			}
+			else
+			{
+				left=midpoint+1;
+			}
+		}
+		if(target==occs.get(midpoint).frequency || target<occs.get(midpoint).frequency)
+		{
+			Occurrence temp=occs.get(occs.size()-1);
+			for(int i=occs.size()-1;i>midpoint+1;i--)
+			{
+				occs.set(i, occs.get(i-1));
+			}
+			occs.set(midpoint+1, temp);
+		}
+		else 
+		{
+			Occurrence temp=occs.get(occs.size()-1);
+			for(int i=occs.size()-1;i>midpoint;i--)
+			{
+				occs.set(i, occs.get(i-1));
+			}
+			occs.set(midpoint, temp);
+		}
+		return midpointer;
+	}
