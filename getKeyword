@@ -1,0 +1,51 @@
+public String getKeyword(String word) {
+		word=word.toLowerCase();
+		boolean end=true;
+		boolean letter=false;
+		int place=-1;
+		for(int i=0;i<word.length();i++)
+		{
+			if(!Character.isLetter(word.charAt(i)))
+			{
+				if(end==true)
+				{
+					place=i;
+				}
+				end=false;
+			}
+			else
+			{
+				letter=true;
+			}
+			if(Character.isLetter(word.charAt(i)) && end==false)
+			{
+				return null;
+			}
+		}
+		if(place!=-1)
+		{
+			for(int k=place;k<word.length();k++)
+			{
+				if(!(word.charAt(k)=='.' || word.charAt(k)==',' || word.charAt(k)=='?' || word.charAt(k)==':' || word.charAt(k)==';' || word.charAt(k)=='!'))
+				{
+					return null;
+				}
+			}
+			if(!(noiseWords.contains(word.substring(0,place))) && letter==true)
+			{
+				return word.substring(0,place);
+			}
+			else
+			{
+				return null;
+			}
+		}
+		if(!(noiseWords.contains(word)) && letter==true)
+		{
+			return word;
+		}
+		else
+		{
+			return null;
+		}
+	}
