@@ -1,0 +1,21 @@
+public class LittleSearchEngine {
+	
+	/**
+	 * This is a hash table of all keywords. The key is the actual keyword, and the associated value is
+	 * an array list of all occurrences of the keyword in documents. The array list is maintained in 
+	 * DESCENDING order of frequencies.
+	 */
+	HashMap<String,ArrayList<Occurrence>> keywordsIndex;
+	
+	/**
+	 * The hash set of all noise words.
+	 */
+	HashSet<String> noiseWords;
+	
+	/**
+	 * Creates the keyWordsIndex and noiseWords hash tables.
+	 */
+	public LittleSearchEngine() {
+		keywordsIndex = new HashMap<String,ArrayList<Occurrence>>(1000,2.0f);
+		noiseWords = new HashSet<String>(100,2.0f);
+	}
