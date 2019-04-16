@@ -1,0 +1,132 @@
+public ArrayList<String> top5search(String kw1, String kw2) {
+		int counter=0;
+		int kw1counter=0;
+		int kw2counter=0;
+		boolean kw1full=false;
+		boolean kw2full=false;
+		if(!keywordsIndex.containsKey(kw1))
+		{
+			kw1full=true;
+		}
+		if(!keywordsIndex.containsKey(kw2))
+		{
+			kw2full=true;
+		}
+		ArrayList<String> hey=new ArrayList<String>();
+		while(counter<5)
+		{
+			if(kw1full==false && kw2full==false)
+			{
+			if(keywordsIndex.get(kw1).get(kw1counter).frequency>keywordsIndex.get(kw2).get(kw2counter).frequency)
+			{
+				if(!(hey.contains(keywordsIndex.get(kw1).get(kw1counter).document)))
+				{
+				hey.add(keywordsIndex.get(kw1).get(kw1counter).document);
+				if(keywordsIndex.get(kw1).get(kw1counter).document==keywordsIndex.get(kw2).get(kw2counter).document)
+				{
+					kw2counter++;
+				}
+				kw1counter++;
+				counter++;
+				}
+				else
+				{
+					kw1counter++;
+				}
+			}
+			else if(keywordsIndex.get(kw1).get(kw1counter).frequency<keywordsIndex.get(kw2).get(kw2counter).frequency)
+			{
+				if(!(hey.contains(keywordsIndex.get(kw2).get(kw2counter).document)))
+				{
+				hey.add(keywordsIndex.get(kw2).get(kw2counter).document);
+				if(keywordsIndex.get(kw1).get(kw1counter).document==keywordsIndex.get(kw2).get(kw2counter).document)
+				{
+					kw1counter++;
+				}
+				kw2counter++;
+				counter++;
+				}
+				else
+				{
+					kw2counter++;
+				}
+			}
+			else
+			{
+				if(keywordsIndex.get(kw1).get(kw1counter).document==keywordsIndex.get(kw2).get(kw2counter).document)
+				{
+					hey.add(keywordsIndex.get(kw1).get(kw1counter).document);
+					kw1counter++;
+					kw2counter++;
+					counter++;
+				}
+				else
+				{
+					if(!(hey.contains(keywordsIndex.get(kw1).get(kw1counter).document)))
+					{
+					hey.add(keywordsIndex.get(kw1).get(kw1counter).document);
+					kw1counter++;
+					counter++;
+					}
+					else
+					{
+						kw1counter++;
+					}
+				}
+			}
+			}
+			else if(kw1full==false && kw2full==true)
+			{
+				if(!(hey.contains(keywordsIndex.get(kw1).get(kw1counter).document)))
+				{
+				hey.add(keywordsIndex.get(kw1).get(kw1counter).document);
+				kw1counter++;
+				counter++;
+				}
+				else
+				{
+					kw1counter++;
+				}
+			}
+			else if(kw1full==true && kw2full==false)
+			{
+				if(!(hey.contains(keywordsIndex.get(kw2).get(kw2counter).document)))
+				{
+				hey.add(keywordsIndex.get(kw2).get(kw2counter).document);
+				kw2counter++;
+				counter++;
+				}
+				else
+				{
+					kw2counter++;
+				}
+			}
+			else
+			{
+				break;
+			}
+			if(kw1full==false)
+			{
+			if(kw1counter==keywordsIndex.get(kw1).size())
+			{
+				kw1full=true;
+			}
+			}
+			if(kw2full==false)
+			{
+			if(kw2counter==keywordsIndex.get(kw2).size())
+			{
+				kw2full=true;
+			}
+			}
+		}
+		if(counter==0)
+		{
+			return null;
+		}
+		else
+		{
+			return hey;
+		}
+	}
+}
