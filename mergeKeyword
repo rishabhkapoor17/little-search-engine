@@ -1,0 +1,16 @@
+public void mergeKeywords(HashMap<String,Occurrence> kws) {
+		for(Map.Entry<String,Occurrence> entry: kws.entrySet())
+		{
+			if(keywordsIndex.containsKey(entry.getKey()))
+			{
+				keywordsIndex.get(entry.getKey()).add(entry.getValue());
+				insertLastOccurrence(keywordsIndex.get(entry.getKey()));
+			}
+			else
+			{
+				ArrayList<Occurrence> hi=new ArrayList<Occurrence>();
+				hi.add(entry.getValue());
+				keywordsIndex.put(entry.getKey(),hi);
+			}
+		}
+	}
